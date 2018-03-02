@@ -2,6 +2,11 @@
 
 document.querySelector('#zipform').addEventListener('submit', getLocationInfo);
 
+// Listen for delete 
+
+document.querySelector('body').addEventListener('click', deleteLocation);
+
+
 function getLocationInfo(e){
     // Get zip value from input 
     const zip = document.querySelector('.zip').value;
@@ -39,10 +44,10 @@ function getLocationInfo(e){
 
             <div class="message-body">
             <ul>
-            <li<strong>City: </strong>${place['place name']}</li>
-            <li<strong>State: </strong>${place['state']}</li>
-            <li<strong>Longitude: </strong>${place['longitude']}</li>
-            <li<strong>Latitude: </strong>${place['latitude']}</li>
+            <li><strong>City: </strong>${place['place name']}</li>
+            <li><strong>State: </strong>${place['state']}</li>
+            <li><strong>Longitude: </strong>${place['longitude']}</li>
+            <li><strong>Latitude: </strong>${place['latitude']}</li>
             </ul>
             
             </div>
@@ -60,10 +65,20 @@ function getLocationInfo(e){
 e.preventDefault();
 }
 
+// Show check or remove icon
 function showIcon (icon) {
     // Clear icons 
     document.querySelector('.icon-remove').style.display = '';
     document.querySelector('.icon-check').style.display = '';
     // Show correct icon
     document.querySelector(`.icon-${icon}`).style.display = 'inline-flex';
+}
+
+function deleteLocation (e) {
+    if(e.target.className == 'delete'){
+        document.querySelector('.message').remove();
+        document.querySelector('.zip').value = '';
+        document.querySelector('.icon-check').remove();
+
+    }
 }
